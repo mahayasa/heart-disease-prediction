@@ -4,6 +4,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 from google.cloud import aiplatform
+import os
+
+
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'credential.json'
 
 st.set_page_config(
     page_title="Heart Disease Prediction",
