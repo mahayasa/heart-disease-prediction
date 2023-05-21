@@ -1,7 +1,7 @@
 import streamlit as st
 
 st.set_page_config(
-    page_title="Hello",
+    page_title="Heart Disease Prediction",
     page_icon="👋",
 )
 
@@ -18,3 +18,40 @@ st.markdown(
 
 """
 )
+
+with st.expander("Code snapshot"):
+    code = '''
+    from xgboost import XGBClassifier
+    
+    # Receiving input from user
+    instances = [{
+    "age":int(age),
+    "sex": int(sex),
+    "cp": int(cp),
+    "trestbps":int(bd),
+    "chol": int(chol),
+    "fbs": int(fbs),
+    "restecg":int(rer),
+    "thalach": int(hr),
+    "exang": int(ex),
+    "oldpeak": float(std),
+    "slope": int(sl),
+    "ca": int(vs),
+    "thal" : int(th)
+    }]
+
+    # Importing the dataset
+    dataset=pd.read_csv('pages/model/heart.csv')
+
+    # Divide data by feature and target
+    X=dataset.drop(['target'],axis=1)
+    y=dataset["target"]
+
+    # Training XGBoost
+    classifier = XGBClassifier(colsample_bytree=0.6, max_depth = 5, gamma=1.5, min_child_weight=5)
+    clf=classifier.fit(X, y)
+
+    # Make prediction
+    input = pd.DataFrame(instances)
+    y_pred = clf.predict(input)'''
+    st.code(code, language='python')
